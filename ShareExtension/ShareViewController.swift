@@ -40,7 +40,6 @@ class ShareViewController: SLComposeServiceViewController {
             }
         }
         
-        
         if let url = URL(string: "DZ10AppShare://text") {
             _ = self.openURL(url)
         }

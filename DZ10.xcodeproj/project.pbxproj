@@ -16,6 +16,7 @@
 		5E19C4832349FE51008D5916 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19C4822349FE51008D5916 /* ShareViewController.swift */; };
 		5E19C4862349FE51008D5916 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E19C4842349FE51008D5916 /* MainInterface.storyboard */; };
 		5E19C48A2349FE51008D5916 /* ShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5E19C4802349FE51008D5916 /* ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5EB1450D234CD6E100965135 /* MeasureRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB1450C234CD6E100965135 /* MeasureRegex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		5E19C4872349FE51008D5916 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E19C48F2349FEB7008D5916 /* ShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShareExtension.entitlements; sourceTree = "<group>"; };
 		5E19C490234A1050008D5916 /* DZ10.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DZ10.entitlements; sourceTree = "<group>"; };
+		5EB1450C234CD6E100965135 /* MeasureRegex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureRegex.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				5E19C4682349FD77008D5916 /* AppDelegate.swift */,
 				5E19C46A2349FD77008D5916 /* SceneDelegate.swift */,
 				5E19C46C2349FD77008D5916 /* ViewController.swift */,
+				5EB1450C234CD6E100965135 /* MeasureRegex.swift */,
 				5E19C46E2349FD77008D5916 /* Main.storyboard */,
 				5E19C4712349FD7A008D5916 /* Assets.xcassets */,
 				5E19C4732349FD7A008D5916 /* LaunchScreen.storyboard */,
@@ -225,6 +228,7 @@
 			files = (
 				5E19C46D2349FD77008D5916 /* ViewController.swift in Sources */,
 				5E19C4692349FD77008D5916 /* AppDelegate.swift in Sources */,
+				5EB1450D234CD6E100965135 /* MeasureRegex.swift in Sources */,
 				5E19C46B2349FD77008D5916 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

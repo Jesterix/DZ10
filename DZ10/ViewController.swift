@@ -30,23 +30,45 @@ class ViewController: UIViewController {
             }
         }
     }
+
+    func formateUnitLengths(measurementFormatter: MeasurementFormatter){
+        var textToDetect = sharedText
+        let templates = MeasureRegex().createRegexArray()
+        
+        for template in templates {
+            if let regex = try? NSRegularExpression(pattern: template.0, options: []){
+                let matches = regex.matches(in: textToDetect, options: [], range: NSRange(location: 0, length: textToDetect.utf16.count))
+                for match in matches.reversed() {
+                    guard let range = Range(match.range, in: textToDetect) else { continue }
+                    let measureString = textToDetect[range].filter("0123456789.,".contains).replacingOccurrences(of: ",", with: ".")
+                    if let measureDouble = Double(measureString) {
+                        let measure = Measurement(value: measureDouble, unit: template.1)
+                        textToDetect = textToDetect.replacingCharacters(in: range, with: measurementFormatter.string(from: measure))
+                        sharedTextLabel.text = textToDetect
+                    }
+                }
+            }
+
+        }
+    }
     
-    func parseAndDetect(dataFormatter: DateFormatter){
+    func formateDates(dataFormatter: DateFormatter){
         var textToDetect = sharedText
         let types: NSTextCheckingResult.CheckingType = [.date]
-        let detector = try! NSDataDetector(types: types.rawValue)
-        let matches = detector.matches(in: textToDetect, options: [], range: NSRange(location: 0, length: textToDetect.utf16.count))
-        for match in matches {
-            guard let range = Range(match.range, in: textToDetect) else { continue }
-            
-            switch match.resultType {
-            case .date:
-                if let date = match.date {
-                    textToDetect = textToDetect.replacingCharacters(in: range, with: dataFormatter.string(from: date))
-                    sharedTextLabel.text = textToDetect
+        if let detector = try? NSDataDetector(types: types.rawValue) {
+            let matches = detector.matches(in: textToDetect, options: [], range: NSRange(location: 0, length: textToDetect.utf16.count))
+            for match in matches.reversed() {
+                guard let range = Range(match.range, in: textToDetect) else { continue }
+                
+                switch match.resultType {
+                case .date:
+                    if let date = match.date {
+                        textToDetect = textToDetect.replacingCharacters(in: range, with: dataFormatter.string(from: date))
+                        sharedTextLabel.text = textToDetect
+                    }
+                default:
+                    return
                 }
-            default:
-                return
             }
         }
     }
@@ -57,17 +79,22 @@ class ViewController: UIViewController {
         let fr = Locale(identifier: "fr")
         let zh = Locale(identifier: "zh_CN")
         let dateFormatter = DateFormatter()
+        dateFormatter.setLocalizedDateFormatFromTemplate(temp)
+        let measurementFormatter = MeasurementFormatter()
         
         switch sender.selectedSegmentIndex {
         case 0:
             dateFormatter.locale = us
+            measurementFormatter.locale = us
         case 1:
             dateFormatter.locale = fr
+            measurementFormatter.locale = fr
         default:
             dateFormatter.locale = zh
+            measurementFormatter.locale = zh
         }
         
-        dateFormatter.setLocalizedDateFormatFromTemplate(temp)
-        parseAndDetect(dataFormatter: dateFormatter)
+        formateDates(dataFormatter: dateFormatter)
+        formateUnitLengths(measurementFormatter: measurementFormatter)
     }
 }
